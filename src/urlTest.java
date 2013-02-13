@@ -5,11 +5,9 @@ import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
 public class urlTest {
+	;
 	
-	
-	public urlTest() {
-		// TODO Auto-generated constructor stub
-	}
+	public urlTest() {	}
 
 	/**
 	 * @param args
@@ -17,11 +15,11 @@ public class urlTest {
 	public static void main(String[] args){
 		URL meSteam;
 		JsonReader reader;
-		
+		SteamUser test = new SteamUser(76561197968613153L);
 		try {
 			meSteam = new URL("http://api.steampowered.com/ISteamUser/" +
 					"GetFriendList/v0001/?key=26A0BE6F08077299B964BBEFBAEE5AA0" +
-					"&relationship=friend&format=json&steamid=76561197968613153");
+					"&relationship=friend&format=json&steamid=" + test.getID());
 			try {
 				reader = new JsonReader(new InputStreamReader(meSteam.openStream()));
 				
@@ -35,10 +33,13 @@ public class urlTest {
 				
 				while(reader.hasNext()){
 					reader.beginObject();
-					
+					System.out.print(reader.nextName() + ":");
+					test.addFriend(reader.nextString());
+					System.out.println("Stored");
 					while (reader.hasNext()){
 						System.out.print(reader.nextName() + ":");
 						System.out.println(reader.nextString());
+						
 					};
 					System.out.println();
 					reader.endObject();
