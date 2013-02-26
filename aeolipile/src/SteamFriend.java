@@ -5,11 +5,11 @@ public class SteamFriend {
 	private int dateOfFriend;
 	
 	public SteamFriend(String steamID, String relationship, int friendSince) {
-		ID = steamID;
-		relation = relationship;
-		dateOfFriend = friendSince;
-	}
+		this.ID = steamID;
+		this.relation = relationship;
+		this.dateOfFriend = friendSince;
 	
+	}
 	public String getID(){
 		return ID;
 	}
