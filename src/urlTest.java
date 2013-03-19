@@ -1,4 +1,5 @@
 import java.net.*;
+import java.util.ArrayList;
 import java.io.*;
 
 import com.google.gson.*;
@@ -6,15 +7,13 @@ import com.google.gson.stream.JsonReader;
 
 public class urlTest {
 	
-	
+	ArrayList<SteamFriend> friend;
+	SteamFriend data;
 	public urlTest() {
 		// TODO Auto-generated constructor stub
+		friend = new ArrayList<SteamFriend>();
 	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args){
+	private void stream(){
 		URL meSteam;
 		JsonReader reader;
 		
@@ -33,15 +32,39 @@ public class urlTest {
 				
 				reader.beginArray();
 				
+				String steamID = null, relationship = null;
+				int i = 0, j = 0,friendSince = 0;
+				
 				while(reader.hasNext()){
 					reader.beginObject();
 					
 					while (reader.hasNext()){
-						System.out.print(reader.nextName() + ":");
-						System.out.println(reader.nextString());
+						i = j % 3;
+						//System.out.print(reader.nextName() + ":");
+						String item, name;
+						name = reader.nextName();
+						System.out.print(name + " : ");
+						item = reader.nextString();
+						System.out.println(item);
+						switch(i){
+						case 0:
+							steamID = item;
+							break;
+						case 1:
+							relationship = item;
+							break;
+						case 2:
+							friendSince = Integer.parseInt(item);
+							break;
+						}
+						//System.out.println(reader.nextString());
+						
+						j++;
 					};
 					System.out.println();
 					reader.endObject();
+					data = new SteamFriend(steamID, relationship, friendSince);
+					friend.add(data);
 				};
 			}
 			
@@ -54,9 +77,13 @@ public class urlTest {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-
-
-
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args){
+		urlTest test = new urlTest();
+		test.stream();
 	}
 
 }
