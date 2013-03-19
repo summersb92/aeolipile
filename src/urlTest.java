@@ -9,6 +9,7 @@ public class urlTest {
 	
 	ArrayList<SteamFriend> friend;
 	SteamFriend data;
+	//SteamFriend obj;
 	public urlTest() {
 		// TODO Auto-generated constructor stub
 		friend = new ArrayList<SteamFriend>();
@@ -37,7 +38,7 @@ public class urlTest {
 				
 				while(reader.hasNext()){
 					reader.beginObject();
-					
+					//obj = new MyObject();
 					while (reader.hasNext()){
 						i = j % 3;
 						//System.out.print(reader.nextName() + ":");
