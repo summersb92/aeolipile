@@ -1,7 +1,6 @@
 import java.net.*;
 import java.io.*;
 
-import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
 public class urlTest {
@@ -9,13 +8,17 @@ public class urlTest {
 	
 	public urlTest() {	}
 
+	
+	public static void main(String[] args){
+		getFriends(76561197968613153L);
+	}
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args){
+	public static void getFriends(Long toGetSteam){
 		URL meSteam;
 		JsonReader reader;
-		SteamUser test = new SteamUser(76561197968613153L);
+		SteamUser test = new SteamUser(toGetSteam);
 		try {
 			meSteam = new URL("http://api.steampowered.com/ISteamUser/" +
 					"GetFriendList/v0001/?key=26A0BE6F08077299B964BBEFBAEE5AA0" +
