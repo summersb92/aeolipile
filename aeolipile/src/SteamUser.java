@@ -2,15 +2,20 @@ import java.util.ArrayList;
 
 
 public class SteamUser {
-	int steamID;
-	ArrayList<SteamFriend> friends;
+	long steamID;
+	ArrayList<SteamUser> friends;
 	
-	public SteamUser(int id) {
+	public SteamUser(long id) {
 		steamID = id;
-		friends = new ArrayList<SteamFriend>();
+		friends = new ArrayList<SteamUser>();
 	}
 	
-	private void addFriend(SteamFriend toAdd){
+	public void addFriend(SteamUser toAdd){
+		friends.add(toAdd);
+	}
+	
+	public long getID() {
+		return steamID;
 		
 	}
 }

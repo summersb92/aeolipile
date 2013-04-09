@@ -7,56 +7,57 @@ import com.google.gson.stream.JsonReader;
 
 
 
-public class urlTest {
-	private static SteamUser su;
+public class Scraper {
+	
+	public Scraper(){}
 	
 	/**
 	 * @param <steamFriend>
 	 * @param args
 	 */
-	public static <steamFriend> void main(String[] args){
+	public ArrayList<SteamUser> scrapeUser(SteamUser u){
+		SteamUser su = u;
 		URL meSteam;
 		JsonReader reader;
-		su = new SteamUser(0);
-		ArrayList<SteamFriend> sf = new ArrayList<SteamFriend>();
+		ArrayList<SteamUser> sf = new ArrayList<SteamUser>();
 		
 		try {
 			meSteam = new URL("http://api.steampowered.com/ISteamUser/" +
 					"GetFriendList/v0001/?key=26A0BE6F08077299B964BBEFBAEE5AA0" +
-					"&relationship=friend&format=json&steamid=76561197968613153");
+					"&relationship=friend&format=json&steamid=" + su.getID());
 			try {
 				reader = new JsonReader(new InputStreamReader(meSteam.openStream()));
 				
-				reader.beginObject();
+				reader.beginObject();//JSON Object
 				System.out.println(reader.nextName());
 				
-				reader.beginObject();
+				reader.beginObject();//FriendList Object
 				System.out.println(reader.nextName());
 				
-				reader.beginArray();
+				reader.beginArray();//FriendList Array
 				
-				while(reader.hasNext()){
+				while(reader.hasNext()){//Read Objects from Array
 					reader.beginObject(); //for each steam id get the 3 objects
 					String id = null;
 					String relationship = null;
 					int friend_since = 0;
-					while (reader.hasNext()){
+					while (reader.hasNext()){//Read Fields from Object
 						reader.nextName();
 						id = reader.nextString();
 						reader.nextName();
 						relationship = reader.nextString();
 						reader.nextName();
 						friend_since =Integer.parseInt(reader.nextString());
-					};
+					
 					System.out.println("steamid: "+ id);
 					System.out.println("relationship: "+relationship);
 					System.out.println("friend_since: "+friend_since);
 					
 					System.out.println();
-					SteamFriend data = new SteamFriend(id, relationship, friend_since);
+					SteamUser data = new SteamUser(Long.parseLong(id));
 					sf.add(data);
-					//SteamFriend.add();
 					reader.endObject();
+					};
 				};
 			}
 			
@@ -69,6 +70,9 @@ public class urlTest {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		
+		
+		return sf;
 
 
 
