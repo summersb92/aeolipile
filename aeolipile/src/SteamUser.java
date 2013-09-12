@@ -23,7 +23,18 @@ public class SteamUser {
 	public void setStatus(byte i){
 		status = i;
 	}
+	
 	public byte getStatus(){
 		return status;
+	}
+	
+	public String printFriends(){
+		String to_ret = "" + steamID + ":";
+		
+		for (SteamUser x:friends){
+			to_ret += x.getID() + ",";
+		}
+		
+		return to_ret.substring(0,to_ret.length()-2) + "\n";
 	}
 }
