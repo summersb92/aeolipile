@@ -4,12 +4,18 @@ import java.util.ArrayList;
 public class SteamUser {
 	long steamID;
 	ArrayList<SteamUser> friends;
+<<<<<<< HEAD
 	byte status; //either 1 - public 0-private
+=======
+>>>>>>> refs/remotes/Roy/master
 	
 	public SteamUser(long id) {
 		steamID = id;
 		friends = new ArrayList<SteamUser>();
+<<<<<<< HEAD
 		status = 1;
+=======
+>>>>>>> refs/remotes/Roy/master
 	}
 	
 	public void addFriend(SteamUser toAdd){
