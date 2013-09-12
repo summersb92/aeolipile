@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
+<<<<<<< HEAD
+	<name>SteamTest</name>
+=======
 	<name>Project</name>
+>>>>>>> upstream/master
 	<comment></comment>
 	<projects>
 	</projects>
