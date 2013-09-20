@@ -2,11 +2,23 @@ import java.net.*;
 import java.util.ArrayList;
 import java.io.*;
 
-import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
 public class urlTest {
+	;
 	
+<<<<<<< HEAD
+	public urlTest() {	}
+
+	
+	public static void main(String[] args){
+		getFriends(76561197968613153L);
+	}
+	/**
+	 * @param args
+	 */
+	public static void getFriends(Long toGetSteam){
+=======
 	ArrayList<SteamFriend> friend;
 	SteamFriend data;
 	//SteamFriend obj;
@@ -15,13 +27,14 @@ public class urlTest {
 		friend = new ArrayList<SteamFriend>();
 	}
 	private void stream(){
+>>>>>>> upstream/master
 		URL meSteam;
 		JsonReader reader;
-		
+		SteamUser test = new SteamUser(toGetSteam);
 		try {
 			meSteam = new URL("http://api.steampowered.com/ISteamUser/" +
 					"GetFriendList/v0001/?key=26A0BE6F08077299B964BBEFBAEE5AA0" +
-					"&relationship=friend&format=json&steamid=76561197968613153");
+					"&relationship=friend&format=json&steamid=" + test.getID());
 			try {
 				reader = new JsonReader(new InputStreamReader(meSteam.openStream()));
 				
@@ -38,6 +51,15 @@ public class urlTest {
 				
 				while(reader.hasNext()){
 					reader.beginObject();
+<<<<<<< HEAD
+					System.out.print(reader.nextName() + ":");
+					test.addFriend(reader.nextString());
+					System.out.println("Stored");
+					while (reader.hasNext()){
+						System.out.print(reader.nextName() + ":");
+						System.out.println(reader.nextString());
+						
+=======
 					//obj = new MyObject();
 					while (reader.hasNext()){
 						i = j % 3;
@@ -61,6 +83,7 @@ public class urlTest {
 						//System.out.println(reader.nextString());
 						
 						j++;
+>>>>>>> upstream/master
 					};
 					System.out.println();
 					reader.endObject();
