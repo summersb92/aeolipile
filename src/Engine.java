@@ -5,13 +5,14 @@ import java.io.*;
 
 public class Engine {
 
-	
+	Outfile out;
 	public static long startID = 76561197968613153l; //Royalaid
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
         Engine engine = new Engine();
+        
         engine.startEngine(startID);
 	}
 	//Constructor
@@ -42,7 +43,8 @@ public class Engine {
 						pw.flush();
 						scrapedUsers.put(curUser.getID(), curUser);
 						System.out.println(curUser.getID() + " scraped");
-					} 
+					}
+					out = new Outfile(friends);
 					pw.println(curUser.getID());
 					pw.flush();
 					
