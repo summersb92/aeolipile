@@ -1,6 +1,7 @@
 package src;
 
 
+
 public class Global {
 
 	//Titles for Columns in Header
@@ -8,9 +9,11 @@ public class Global {
 	//Titles for Player Summaries
 	public static final String STEAMID = "SteamID";
 	public static final String PERSONA = "Personal Name";
-	public static final String PROFILEURL = "Profile URL";
-	public static final String AVATARURL = "Avatar URL";
+	public static final String PROFILEURL = "Profile_URL";
+	public static final String AVATARURL = "Avatar_URL";
 	public static final String VISBILITYSTATE = "Privacy";
+	public static final String PERSONASTATE = "Persona_State";
+	
 	//Titles for Friends Summary
 	public static final String RELATION = "Relation";
 	public static final String FRIENDS_SINCE = "Friends Since";
@@ -20,9 +23,13 @@ public class Global {
 	public static final String AEOLIPILE = "aeolipile";
 	
 	//base user that we are connecting to
-	public static final String URL ="http://api.steampowered.com/ISteamUser/" +
-					"GetFriendList/v0001/?key=26A0BE6F08077299B964BBEFBAEE5AA0" +
-					"&relationship=friend&format=json&steamid=";
+	public static final String KEY="26A0BE6F08077299B964BBEFBAEE5AA0";
+	public static final String FRIENDLISTURL ="http://api.steampowered.com/ISteamUser/" +
+			"GetFriendList/v0001/?key="+KEY+
+			"&relationship=friend&format=json&steamid=";
+	public static final String USERDATAURL="http://api.steampowered.com/ISteamUser/"+
+			"GetPlayerSummaries/v0002/?key="+KEY+"&steamids=";
+
 	
 	//Counter Coneventions
 	public static final int COLLECTED = 100; //for while to set off new thread

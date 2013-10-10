@@ -60,6 +60,7 @@ public class Outfile extends Thread{
 	 * @param friend
 	 * @throws IOException
 	 */
+	//No spaces allowed for sas
 	private void generateFile(ArrayList<SteamUser> friend)
 			throws IOException{
 		
@@ -67,6 +68,11 @@ public class Outfile extends Thread{
 		bw.write(Global.STEAMID+","+Global.RELATION+","
 			+Global.FRIENDS_SINCE+";\n");
 		editFile(friend);
+	}
+	//TODO Complete profile generation
+	private void genearteProfileFile(ArrayList<SteamProfile> profile){
+		//bw.write(Global.STEAMID+",")
+
 	}
 	/**
 	 * appends to the end of a file.
@@ -80,22 +86,10 @@ public class Outfile extends Thread{
 		for(int i=0; i<friend.size(); i++){
 			bw.append(friend.get(i).toSAS());
 		}
-		/**Need to look Owned Games **/
-		
-		//bw.write();
-		
-		
-		
-//		 * ID:
-//			 * Start date:
-//			 * Profile Name:
-//			 * Game hrs total:
-//			 * Games
-//			 * game id_hrs total
-//			 * game owned Y/N
-//			 * gameId_value - cost at pull(??????)
-//			 * Achievements ?????
-//			 * 
-
+	}
+	private void playerFile(ArrayList<SteamProfile> profile) throws IOException{
+		for(int i=0; i<profile.size(); i++){
+			bw.append(profile.get(i).toSaSProfile());
+		}
 	}
 }
