@@ -3,15 +3,15 @@ package src;
 import java.util.ArrayList;
 
 public class SteamUser {
-	long steamID;
-	String personaname;
-	String profileURL;
-	String avatar32;
-	String avatar64;
-	String avatar184;
-	int personaState;
-	ArrayList<SteamUser> friends;
-	byte status; //either 1 - public 0-private
+	private long steamID;
+	private String personaname;
+	private String profileURL;
+	private String avatar32;
+	private String avatar64;
+	private String avatar184;
+	private int personaState;
+	private ArrayList<SteamUser> friends;
+	private byte status; //either 1 - public 0-private
 
 	//	int friend_since;
 	/**
@@ -44,39 +44,22 @@ public class SteamUser {
 	}
 	
 	
-	/**
-	 * Add's the user found to a friends list
-	 * 
-	 * @param toAdd
-	 */
 	public void addFriend(SteamUser toAdd){
 		friends.add(toAdd);
 	}
 	
-
-	/**
-	 * Get the ID of the steam user
-	 * @return - steam user ID
-	 */
+	
 	public long getID() {
 		return steamID;
 
 	}
 	
 	
-	/**
-	 * Set's the Status of a user
-	 * @param i - either 1(public) or 0(private)
-	 */
 	public void setStatus(byte i){
 		status = i;
 	}
 	
 	
-	/**
-	 * Gets the status of a user
-	 * @return - return either 1(public) or 0(private)
-	 */
 	public byte getStatus(){
 		return status;
 	}
@@ -85,6 +68,7 @@ public class SteamUser {
 	public String toSAS_ID(){
 		return steamID +","+ status+";\n";
 	}
+	
 	
 	public String toSASProfile(){
 		return steamID +","+ personaname+", "+avatar32+", "+avatar64+
@@ -119,7 +103,7 @@ public class SteamUser {
 	 * Makes a new line at the end.
 	 * @return
 	 */
-	public String getPlayerFriendsList(){
+	public String getPlayerFriendsListString(){
 		String friendOutput = null;
 		for(int i=0; i<friends.size(); i++){
 			friendOutput = friendOutput+","+friends.get(i).getID(); 
@@ -136,14 +120,65 @@ public class SteamUser {
 	}
 	//TODO FromFile method, need to read from a file
 
+	public long getSteamID() {
+		return steamID;
+	}
 	
-	//	public String printFriends(){
-	//		String to_ret = "" + steamID + ":";
-	//		
-	//		for (SteamUser x:friends){
-	//			to_ret += x.getID() + ",";
-	//		}
-	//		
-	//		return to_ret.substring(0,to_ret.length()-2) + "\n";
-	//	}
+	public String getPersonaname() {
+		return personaname;
+	}
+
+	public void setPersonaname(String personaname) {
+		this.personaname = personaname;
+	}
+
+	public String getProfileURL() {
+		return profileURL;
+	}
+
+	public void setProfileURL(String profileURL) {
+		this.profileURL = profileURL;
+	}
+
+	public String getAvatar32() {
+		return avatar32;
+	}
+
+	public void setAvatar32(String avatar32) {
+		this.avatar32 = avatar32;
+	}
+
+	public String getAvatar64() {
+		return avatar64;
+	}
+
+	public void setAvatar64(String avatar64) {
+		this.avatar64 = avatar64;
+	}
+
+	public String getAvatar184() {
+		return avatar184;
+	}
+
+	public void setAvatar184(String avatar184) {
+		this.avatar184 = avatar184;
+	}
+
+	public int getPersonaState() {
+		return personaState;
+	}
+
+	public void setPersonaState(int personaState) {
+		this.personaState = personaState;
+	}
+
+	public ArrayList<SteamUser> getFriends() {
+		return friends;
+	}
+
+	public void setFriends(ArrayList<SteamUser> friends) {
+		this.friends = friends;
+	}
+
+	
 }

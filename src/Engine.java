@@ -35,7 +35,7 @@ public class Engine {
 			while(!queue.isEmpty()){
 				
 				SteamUser curUser = queue.removeFirst();
-				getter.getSteamUser(curUser.getID()); //gets a single individuals Profile info
+				curUser = getter.getPlayerSummary(curUser); //gets a single individuals Profile info
 				
 				if(!scrapedUsers.containsKey(curUser.getID())){ //TODO fix
 					//System.out.println("checked");

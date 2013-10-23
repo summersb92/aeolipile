@@ -28,23 +28,15 @@ public class SteamGetter {
 
 	public SteamGetter(){}
 
-
-	public void getSteamUser(long id) throws IOException {		
-		playerSummary(reader = new JsonReader(new InputStreamReader(
-				connect(Global.USERDATAURL,id).openStream())));
-	}
-
-
 	private URL connect(String URL, long id) throws MalformedURLException{
 		URL url = new URL(URL+id);
 		return url;
 	}
 
 
-	public void playerSummary(JsonReader reader) throws IOException{
-		//TODO set up to handle private information
-		//TODO clean up to improve efficiency.	
-		//Gets only public variables at this point
+	public SteamUser getPlayerSummary( SteamUser su) throws IOException{
+		reader = new JsonReader(new InputStreamReader(
+				connect(Global.USERDATAURL,su.getID()).openStream()));
 
 		//"response"
 		reader.beginObject(); 
@@ -72,37 +64,42 @@ public class SteamGetter {
 
 			case "personaname": 
 				personaname = reader.nextString(); //PersonaName Value
+				su.setPersonaname(personaname);
 				System.out.print("Name: ");
 				System.out.println(personaname);
 				break;
 
 			case "profileurl":
 				profileURL = reader.nextString(); //ProfileURL Value
+				su.setProfileURL(profileURL);
 				System.out.print("URL: ");
 				System.out.println(profileURL);
 				break;
 
 			case "avatar":
 				avatar32 = reader.nextString(); //"Avatar Value
+				su.setAvatar32(avatar32);
 				System.out.print("32x32 Avatar: "); 
 				System.out.println(avatar32);
 				break;
 
 			case "avatarmedium":
 				avatar64 = reader.nextString();//AvatarMedium Value
+				su.setAvatar64(avatar64);
 				System.out.print("64x64 Avatar: ");
 				System.out.println(avatar64);
 				break;
 
 			case "avatarfull":
 				avatar184 = reader.nextString(); //AvatarFull Value
+				su.setAvatar184(avatar184);
 				System.out.print("184x184 Avatar: ");
 				System.out.println(avatar184);
 				break;
 
 			case "personastate":
 				personaState = Integer.parseInt(reader.nextString());
-
+				su.setPersonaState(personaState);
 				System.out.print("PersonaState: ");
 				System.out.println(personaState);
 				break;
@@ -112,6 +109,7 @@ public class SteamGetter {
 			}
 		}
 		reader.close();
+		return su;
 	}
 
 
