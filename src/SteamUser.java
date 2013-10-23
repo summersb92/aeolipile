@@ -27,6 +27,8 @@ public class SteamUser {
 		avatar64 = null;
 		avatar184 = null;
 		personaState = 0;
+		friends = new ArrayList<SteamUser>();
+		status = 1;
 	}
 	
 	public SteamUser(long id,String name,String url,

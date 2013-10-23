@@ -61,94 +61,81 @@ public class SteamGetter {
 		reader.beginObject(); 
 		System.out.println("New User");
 
-		//"SteamID"
-		reader.nextName(); 
-		SteamID = reader.nextString(); //SteamID Value 
-		System.out.print("ID: ");
-		System.out.println(SteamID);
+		while(reader.hasNext()){
+			switch (reader.nextName()){
 
-		//"ComVisState"
-		System.out.println(reader.nextName()); 
-		reader.nextString(); //ComVisState Value
+			case "steamid":
+				SteamID = reader.nextString();
+				System.out.print("ID: ");
+				System.out.println(SteamID);
+				break;
 
-		//"ProfState"
-		System.out.println(reader.nextName()); 
-		reader.nextString(); //ProfState Value
+			case "personaname": 
+				personaname = reader.nextString(); //PersonaName Value
+				System.out.print("Name: ");
+				System.out.println(personaname);
+				break;
 
-		//"PersonaName"
-		reader.nextName(); 
-		personaname = reader.nextString(); //PersonaName Value
-		System.out.print("Name: ");
-		System.out.println(personaname);
+			case "profileurl":
+				profileURL = reader.nextString(); //ProfileURL Value
+				System.out.print("URL: ");
+				System.out.println(profileURL);
+				break;
 
-		//"LastLogOff"
-		System.out.println(reader.nextName()); 
-		System.out.println(reader.nextString());//LastLog Value
+			case "avatar":
+				avatar32 = reader.nextString(); //"Avatar Value
+				System.out.print("32x32 Avatar: "); 
+				System.out.println(avatar32);
+				break;
 
-		//"ProfileURL"
-		reader.nextName();
-		profileURL = reader.nextString(); //ProfileURL Value
-		System.out.print("URL: ");
-		System.out.println(profileURL);
+			case "avatarmedium":
+				avatar64 = reader.nextString();//AvatarMedium Value
+				System.out.print("64x64 Avatar: ");
+				System.out.println(avatar64);
+				break;
 
-		//"Avatar"
-		reader.nextName();
-		avatar32 = reader.nextString(); //"Avatar Value
-		System.out.print("32x32 Avatar: "); 
-		System.out.println(avatar32);
+			case "avatarfull":
+				avatar184 = reader.nextString(); //AvatarFull Value
+				System.out.print("184x184 Avatar: ");
+				System.out.println(avatar184);
+				break;
 
-		//"AvatarMedium"
-		reader.nextName(); 
-		avatar64 = reader.nextString();//AvatarMedium Value
-		System.out.print("64x64 Avatar: ");
-		System.out.println(avatar64);
+			case "personastate":
+				personaState = Integer.parseInt(reader.nextString());
 
-		//"AvatarFull"
-		reader.nextName(); 
-		avatar184 = reader.nextString(); //AvatarFull Value
-		System.out.print("184x184 Avatar: ");
-		System.out.println(avatar184);
+				System.out.print("PersonaState: ");
+				System.out.println(personaState);
+				break;
 
-		//"PersonnaState"
-		System.out.print(reader.nextName()+": ");
-		personaState = Integer.parseInt(reader.nextString());
-		System.out.println(personaState);
-
-		/*
-		 * Any additional information is private
-		 */
-		//while(reader.hasNext()){}; //Pops Additional Info
+			default:
+				reader.skipValue();
+			}
+		}
 		reader.close();
 	}
 
 
 	/**
-	 * Gets a user's friends list and saves to an arraylist
-	 * @param b 
-	 * @param reader 
-	 * @param sf 
+	 * Gets a user's friends as an ArrayList
 	 * 
 	 * @param id - the user id
 	 * @throws IOException 
 	 */
-	//TODO Impliment this method to work properly
 	public ArrayList<SteamUser> userFriendData(SteamUser u) throws IOException {
 
 		SteamUser su = u;
 		URL meSteam;
 		JsonReader reader;
 		ArrayList<SteamUser> sf = new ArrayList<SteamUser>();
-		SteamGetter getter = new SteamGetter();
 
 		try {
 			meSteam = new URL(Global.FRIENDLISTURL + su.getID());
 			try {
-				//TODO use the new SteamGetter class to read through JSON
 				reader = new JsonReader(new InputStreamReader(meSteam.openStream()));
 				reader.beginObject();//JSON Object
-				System.out.println(reader.nextName());
+				reader.nextName();
 				reader.beginObject();//FriendList Object
-				System.out.println(reader.nextName());
+				reader.nextName();
 				reader.beginArray();//FriendList Array
 				String id = null;
 				String relationship = null;
@@ -162,9 +149,9 @@ public class SteamGetter {
 					reader.nextName();
 					friend_since = Integer.parseInt(reader.nextString());
 
-					System.out.println("steamid: "+ id);
-					System.out.println("relationship: "+relationship);
-					System.out.println("friend_since: "+friend_since+"\n");
+//					System.out.println("steamid: "+ id);
+//					System.out.println("relationship: "+relationship);
+//					System.out.println("friend_since: "+friend_since+"\n");
 
 					SteamUser data = new SteamUser(Long.parseLong(id));
 					sf.add(data);
