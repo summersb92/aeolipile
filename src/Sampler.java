@@ -9,18 +9,23 @@ package src;
  */
 public class Sampler {
 	//TODO build the sample selections
+	
+	
 	/**
 	 * Basic constructor of the Sampler mechanics
 	 * 
 	 */
-	
 	public Sampler(){
 		
 	}
+	
+	
 	//Start from a seed
 	public void Seed(){
 		
 	}
+	
+	
 	//Pick random Id's
 	public void Random(){
 		//output something that tells me the failure rate
@@ -28,16 +33,24 @@ public class Sampler {
 		
 		
 	}
+	
+	
 	//sectionalized random Id's
 	public void StratifiedRandom(){
 		
 	}
+	
+	
 	private int gaussian(){
 		return 0;
 	}
+	
+	
 	private int random(){
 		return 0;
 	}
+	
+	
 	private void segment(){
 		
 	}

@@ -7,26 +7,26 @@ public class Engine {
 
 	Outfile out;
 	public static long startID = 76561197968613153l; //Royalaid
+	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
         Engine engine = new Engine();
-        
         engine.startEngine(startID);
 	}
+	
+	
 	//Constructor
-	public Engine(){
-		
-	}
+	public Engine(){}
+	
 	//Starts the program using a given user ID
 	public void startEngine(long startID){
 		
 		LinkedList<SteamUser> queue = new LinkedList<SteamUser>();
 		//TODO Find a better purpose for the HashMap
 		HashMap<Long, SteamUser> scrapedUsers = new HashMap<Long, SteamUser>(); 
-		Scraper scrape = new Scraper();
-		SteamGetter user = new SteamGetter();
+		SteamGetter getter = new SteamGetter();
 		
 		try {
 //			PrintWriter pw = new PrintWriter(new FileWriter("SteamUsers.txt"));
@@ -34,12 +34,11 @@ public class Engine {
 			
 			while(!queue.isEmpty()){
 				
-				SteamUser curUser = queue.removeFirst();
-				user.getSteamUser(curUser.getID()); //gets a single individuals Profile info
+				SteamUser curUser = queue.removeFirst();//gets a single individuals Profile info
 				
-				if(!scrapedUsers.containsKey(curUser.getID())){ //TODO fix
-					//System.out.println("checked");
-					ArrayList<SteamUser> friends = scrape.scrapeUser(curUser);
+				if(!scrapedUsers.containsKey(curUser.getID())){
+					curUser = getter.getPlayerSummary(curUser); 
+					ArrayList<SteamUser> friends = getter.userFriendData(curUser);
 					for(SteamUser freind: friends){
 						queue.add(freind);
 						curUser.addFriend(freind);

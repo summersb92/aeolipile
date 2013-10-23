@@ -1,1 +1,0 @@
-INDEX VERSION 1.126+/home/summersb/aeolipile/.metadata/.plugins/org.eclipse.jdt.core
