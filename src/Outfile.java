@@ -14,11 +14,15 @@ import java.util.Calendar;
  * @author summersb
  *
  */
+
+
 public class Outfile extends Thread{
 	BufferedWriter bw;
 	FileWriter fw;
 	File file;
 	Calendar now;
+	
+	
 	/**
 	 * Constructor for the Outfile class. Generates or edits the
 	 * file being used for the day.
@@ -53,6 +57,7 @@ public class Outfile extends Thread{
 		bw.close();
 	}
 
+	
 	/**
 	 * Generate file creates the initial header set up of a file if
 	 * it has not been created yet.
@@ -69,11 +74,15 @@ public class Outfile extends Thread{
 			+Global.FRIENDS_SINCE+";\n");
 		editFile(friend);
 	}
+	
+	
 	//TODO Complete profile generation
 	private void genearteProfileFile(ArrayList<SteamProfile> profile){
 		//bw.write(Global.STEAMID+",")
 
 	}
+	
+	
 	/**
 	 * appends to the end of a file.
 	 * 
@@ -81,12 +90,14 @@ public class Outfile extends Thread{
 	 * @throws IOException
 	 */
 	private void editFile(ArrayList<SteamUser> friend) throws IOException{
-//Organization of stats are
+		//Organization of stats are
 		//Steam ID, PersonalName, profileurl, avatar(get url for image),visibility status, lastlogoff
 		for(int i=0; i<friend.size(); i++){
-			bw.append(friend.get(i).toSAS());
+			bw.append(friend.get(i).toSAS_ID());
 		}
 	}
+	
+	
 	private void playerFile(ArrayList<SteamProfile> profile) throws IOException{
 		for(int i=0; i<profile.size(); i++){
 			bw.append(profile.get(i).toSaSProfile());

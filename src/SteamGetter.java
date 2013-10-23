@@ -26,77 +26,102 @@ public class SteamGetter {
 	
 	ArrayList<SteamProfile> friends;
 	
-	public SteamGetter(){
-		
-	}	
+	public SteamGetter(){}
+	
+	
 	public void getSteamUser(long id) throws IOException {		
 		playerSummary(reader = new JsonReader(new InputStreamReader(
 				connect(Global.USERDATAURL,id).openStream())));
 	}
+	
+	
 	private URL connect(String URL, long id) throws MalformedURLException{
 		URL url = new URL(URL+id);
 		return url;
 	}
+	
+	
 	public void playerSummary(JsonReader reader) throws IOException{
 		//TODO set up to handle private information
 		//TODO clean up to improve efficiency.	
-		/**
-		 * Gets only public variables at this point
-		 */
-		reader.beginObject();
-		//Gets all public data
+		//Gets only public variables at this point
+		 
+		//"response"
+		reader.beginObject(); 
+			
+			//"Players"
 			reader.nextName();
-			reader.beginObject();
-			reader.nextName();
-			reader.beginArray();
-			//gets Player Object
-			reader.beginObject();
-			System.out.println("New User");
-			reader.nextName();
-			SteamID = reader.nextString();
-			System.out.print("ID: ");
-			System.out.println(SteamID);
-			System.out.println(reader.nextName());
-			reader.nextString();
-			System.out.println(reader.nextName());
-			reader.nextString();
-			reader.nextName();
-			personaname = reader.nextString();
-			System.out.print("Name: ");
-			System.out.println(personaname);
-			//Lastlog off time in unix
-			System.out.println(reader.nextName());
-			System.out.println(reader.nextString());
-			//Gets profile URL
-			reader.nextName();
-			profileURL = reader.nextString();
-			System.out.print("URL: ");
-			System.out.println(profileURL);
-			/*
-			 * Gets all the avatars
-			 */
-			reader.nextName();
-			avatar32 = reader.nextString();
-			System.out.print("32x32 Avatar: ");
-			System.out.println(avatar32);
-			reader.nextName();
-			avatar64 = reader.nextString();
-			System.out.print("64x64 Avatar: ");
-			System.out.println(avatar64);
-			reader.nextName();
-			avatar184 = reader.nextString();
-			System.out.print("184x184 Avatar: ");
-			System.out.println(avatar184);
-			//Personna State
-			System.out.print(reader.nextName()+": ");
-			personaState = Integer.parseInt(reader.nextString());
-			System.out.println(personaState);
-			/**
-			 * Any additional information is private
-			 */
-			//THESE ARE PRIVATE VARIABLES FROM HERE ON OUT
-//		reader.endObject();
+			reader.beginObject(); 
+				reader.nextName();
+				
+				//"["
+				reader.beginArray();
+			
+					//"{" Player Object
+					reader.beginObject(); 
+					System.out.println("New User");
+					
+					//"SteamID"
+					reader.nextName(); 
+					SteamID = reader.nextString(); //SteamID Value 
+					System.out.print("ID: ");
+					System.out.println(SteamID);
+					
+					//"ComVisState"
+					System.out.println(reader.nextName()); 
+					reader.nextString(); //ComVisState Value
+					
+					//"ProfState"
+					System.out.println(reader.nextName()); 
+					reader.nextString(); //ProfState Value
+					
+					//"PersonaName"
+					reader.nextName(); 
+					personaname = reader.nextString(); //PersonaName Value
+					System.out.print("Name: ");
+					System.out.println(personaname);
+					
+					//"LastLogOff"
+					System.out.println(reader.nextName()); 
+					System.out.println(reader.nextString());//LastLog Value
+					
+					//"ProfileURL"
+					reader.nextName();
+					profileURL = reader.nextString(); //ProfileURL Value
+					System.out.print("URL: ");
+					System.out.println(profileURL);
+					
+					 //"Avatar"
+					reader.nextName();
+					avatar32 = reader.nextString(); //"Avatar Value
+					System.out.print("32x32 Avatar: "); 
+					System.out.println(avatar32);
+					
+					//"AvatarMedium"
+					reader.nextName(); 
+					avatar64 = reader.nextString();//AvatarMedium Value
+					System.out.print("64x64 Avatar: ");
+					System.out.println(avatar64);
+					
+					//"AvatarFull"
+					reader.nextName(); 
+					avatar184 = reader.nextString(); //AvatarFull Value
+					System.out.print("184x184 Avatar: ");
+					System.out.println(avatar184);
+					
+					//"PersonnaState"
+					System.out.print(reader.nextName()+": ");
+					personaState = Integer.parseInt(reader.nextString());
+					System.out.println(personaState);
+					
+	   /*
+		* Any additional information is private
+		*/
+		while(reader.hasNext()){}; //Pops Additional Info
+		reader.endObject();
 	}
+	
+	
 	/**
 	 * Gets a user's friends list and saves to an arraylist
 	 * @param b 
@@ -130,6 +155,8 @@ public class SteamGetter {
 		
 		};
 	}
+	
+	
 	/**
 	 * Gets the steam user's game data
 	 * 
@@ -137,9 +164,7 @@ public class SteamGetter {
 	 * @param gameID
 	 */
 	//TODO Impliment the method
-	public void getSteamUserGameData(long userID, long gameID){
-		
-	}
+	public void getSteamUserGameData(long userID, long gameID){}
 
 	/**
 	 * sets a unix system date to gregorian date
