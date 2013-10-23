@@ -34,11 +34,10 @@ public class Engine {
 			
 			while(!queue.isEmpty()){
 				
-				SteamUser curUser = queue.removeFirst();
-				curUser = getter.getPlayerSummary(curUser); //gets a single individuals Profile info
+				SteamUser curUser = queue.removeFirst();//gets a single individuals Profile info
 				
-				if(!scrapedUsers.containsKey(curUser.getID())){ //TODO fix
-					//System.out.println("checked");
+				if(!scrapedUsers.containsKey(curUser.getID())){
+					curUser = getter.getPlayerSummary(curUser); 
 					ArrayList<SteamUser> friends = getter.userFriendData(curUser);
 					for(SteamUser freind: friends){
 						queue.add(freind);

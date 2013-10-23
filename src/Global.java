@@ -4,6 +4,8 @@ package src;
 
 public class Global {
 
+	//
+	
 	//Titles for Columns in Header
 	
 	//Titles for Player Summaries
@@ -34,4 +36,6 @@ public class Global {
 	//Counter Coneventions
 	public static final int COLLECTED = 100; //for while to set off new thread
 	public static final String CounterS = "Entries"; //used in header for # of entries
+
+	public static final boolean DEBUG = false;
 }

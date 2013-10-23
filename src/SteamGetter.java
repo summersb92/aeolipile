@@ -58,50 +58,64 @@ public class SteamGetter {
 
 			case "steamid":
 				SteamID = reader.nextString();
-				System.out.print("ID: ");
-				System.out.println(SteamID);
+				if(Global.DEBUG){
+					System.out.print("ID: ");
+					System.out.println(SteamID);
+				}
 				break;
 
 			case "personaname": 
 				personaname = reader.nextString(); //PersonaName Value
 				su.setPersonaname(personaname);
-				System.out.print("Name: ");
-				System.out.println(personaname);
+				if(Global.DEBUG){
+					System.out.print("Name: ");
+					System.out.println(personaname);
+				}
 				break;
 
 			case "profileurl":
 				profileURL = reader.nextString(); //ProfileURL Value
 				su.setProfileURL(profileURL);
-				System.out.print("URL: ");
-				System.out.println(profileURL);
+				if(Global.DEBUG){
+					System.out.print("URL: ");
+					System.out.println(profileURL);
+				}
 				break;
 
 			case "avatar":
 				avatar32 = reader.nextString(); //"Avatar Value
 				su.setAvatar32(avatar32);
-				System.out.print("32x32 Avatar: "); 
-				System.out.println(avatar32);
+				if(Global.DEBUG){
+					System.out.print("32x32 Avatar: "); 
+					System.out.println(avatar32);
+				}
 				break;
 
 			case "avatarmedium":
 				avatar64 = reader.nextString();//AvatarMedium Value
 				su.setAvatar64(avatar64);
-				System.out.print("64x64 Avatar: ");
-				System.out.println(avatar64);
+				if(Global.DEBUG){
+					System.out.print("64x64 Avatar: ");
+					System.out.println(avatar64);
+				}
 				break;
 
 			case "avatarfull":
 				avatar184 = reader.nextString(); //AvatarFull Value
 				su.setAvatar184(avatar184);
-				System.out.print("184x184 Avatar: ");
-				System.out.println(avatar184);
+				if(Global.DEBUG){
+					System.out.print("184x184 Avatar: ");
+					System.out.println(avatar184);
+				}
 				break;
 
 			case "personastate":
 				personaState = Integer.parseInt(reader.nextString());
 				su.setPersonaState(personaState);
-				System.out.print("PersonaState: ");
-				System.out.println(personaState);
+				if(Global.DEBUG){
+					System.out.print("PersonaState: ");
+					System.out.println(personaState);
+				}
 				break;
 
 			default:
@@ -147,9 +161,9 @@ public class SteamGetter {
 					reader.nextName();
 					friend_since = Integer.parseInt(reader.nextString());
 
-//					System.out.println("steamid: "+ id);
-//					System.out.println("relationship: "+relationship);
-//					System.out.println("friend_since: "+friend_since+"\n");
+					//					System.out.println("steamid: "+ id);
+					//					System.out.println("relationship: "+relationship);
+					//					System.out.println("friend_since: "+friend_since+"\n");
 
 					SteamUser data = new SteamUser(Long.parseLong(id));
 					sf.add(data);
