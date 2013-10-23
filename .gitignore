@@ -1,5 +1,5 @@
-/bin
+/bin*
 .checkstyle
 SteamUsers.txt
-/.metadata
-/.settings
+/.metadata*
+/.settings*
