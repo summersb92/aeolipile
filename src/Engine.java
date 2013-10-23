@@ -26,7 +26,6 @@ public class Engine {
 		LinkedList<SteamUser> queue = new LinkedList<SteamUser>();
 		//TODO Find a better purpose for the HashMap
 		HashMap<Long, SteamUser> scrapedUsers = new HashMap<Long, SteamUser>(); 
-		Scraper scrape = new Scraper();
 		SteamGetter getter = new SteamGetter();
 		
 		try {
@@ -40,7 +39,7 @@ public class Engine {
 				
 				if(!scrapedUsers.containsKey(curUser.getID())){ //TODO fix
 					//System.out.println("checked");
-					ArrayList<SteamUser> friends = scrape.scrapeUser(curUser);
+					ArrayList<SteamUser> friends = getter.userFriendData(curUser);
 					for(SteamUser freind: friends){
 						queue.add(freind);
 						curUser.addFriend(freind);
