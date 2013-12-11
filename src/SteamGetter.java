@@ -1,5 +1,8 @@
 package src;
 
+import gamesOwned.GameScraper;
+import global.Global;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -7,6 +10,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import sun.util.calendar.LocalGregorianCalendar.Date;
+import userProfile.SteamProfile;
+import userProfile.SteamUser;
 
 import com.google.gson.stream.JsonReader;
 
@@ -22,6 +27,7 @@ public class SteamGetter {
 	String avatar64;
 	String avatar184;
 	int personaState;
+	int gameCount;
 	JsonReader reader;
 
 	ArrayList<SteamProfile> friends;
@@ -32,9 +38,9 @@ public class SteamGetter {
 		URL url = new URL(URL+id);
 		return url;
 	}
-
-
 	public SteamUser getPlayerSummary( SteamUser su) throws IOException{
+
+		
 		reader = new JsonReader(new InputStreamReader(
 				connect(Global.USERDATAURL,su.getID()).openStream()));
 
@@ -123,9 +129,18 @@ public class SteamGetter {
 			}
 		}
 		reader.close();
+		//<!-- RESETS
+		getGameSummary(su);
+		su.getGamesCount();
+		//TODO: Need to assign the value to su
+		//su.setGameCount(gameCount);
+		return su; //SU Stillholds value
+	}
+	public SteamUser getGameSummary(SteamUser su) throws IOException{
+		GameScraper scraper = new GameScraper();
+		scraper.GameScraper(su);
 		return su;
 	}
-
 
 	/**
 	 * Gets a user's friends as an ArrayList
@@ -139,7 +154,7 @@ public class SteamGetter {
 		URL meSteam;
 		JsonReader reader;
 		ArrayList<SteamUser> sf = new ArrayList<SteamUser>();
-
+//TODO Put a cut off mark
 		try {
 			meSteam = new URL(Global.FRIENDLISTURL + su.getID());
 			try {
@@ -160,7 +175,7 @@ public class SteamGetter {
 					relationship = reader.nextString();
 					reader.nextName();
 					friend_since = Integer.parseInt(reader.nextString());
-
+				//	addGame
 					//					System.out.println("steamid: "+ id);
 					//					System.out.println("relationship: "+relationship);
 					//					System.out.println("friend_since: "+friend_since+"\n");

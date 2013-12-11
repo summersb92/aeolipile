@@ -1,0 +1,7 @@
+/bin*
+.checkstyle
+SteamUsers.txt
+/.metadata*
+/.settings*
+/bin
+aeolipile_*.txt
